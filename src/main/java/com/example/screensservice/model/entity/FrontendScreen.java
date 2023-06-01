@@ -1,4 +1,4 @@
-package com.example.frontendscreensservice.model.entity;
+package com.example.screensservice.model.entity;
 
 
 import jakarta.persistence.*;
@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "FRONTEND_SCREENS_REGISTER", schema = "PITCHES")
+@Table(name = "frontend_screens_register", schema = "pitches")
 public class FrontendScreen {
 
     @Id
@@ -25,9 +25,16 @@ public class FrontendScreen {
     @Column(name = "FSR_SCREEN_NAME")
     private String screenName;
 
+    @Column(name = "FSR_SHORT_DESCRIPTION")
+    private String shortDescription;
+
+    @Column(name = "FSR_DESCRIPTION")
+    private String description;
+
     @Column(name = "FSR_TARGET_SYSTEM")
     private BigDecimal targetSystem;
 
     @Column(name = "FSR_SCREEN_FIELDS", columnDefinition = "json")
     private String screenFields;
+
 }

@@ -1,8 +1,8 @@
-package com.example.frontendscreensservice.service;
+package com.example.screensservice.service;
 
-import com.example.frontendscreensservice.mapper.FrontendScreensMapper;
-import com.example.frontendscreensservice.model.dto.FrontendScreenDto;
-import com.example.frontendscreensservice.repository.FrontendScreensRepository;
+import com.example.screensservice.mapper.FrontendScreensMapper;
+import com.example.screensservice.model.dto.FrontendScreenDto;
+import com.example.screensservice.repository.FrontendScreensRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

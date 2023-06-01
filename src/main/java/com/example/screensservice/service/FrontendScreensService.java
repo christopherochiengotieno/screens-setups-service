@@ -1,6 +1,6 @@
-package com.example.frontendscreensservice.service;
+package com.example.screensservice.service;
 
-import com.example.frontendscreensservice.model.dto.FrontendScreenDto;
+import com.example.screensservice.model.dto.FrontendScreenDto;
 
 import java.util.List;
 

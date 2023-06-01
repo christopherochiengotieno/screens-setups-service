@@ -1,9 +1,10 @@
-package com.example.frontendscreensservice.controller;
+package com.example.screensservice.controller;
 
-import com.example.frontendscreensservice.model.dto.FrontendScreenDto;
-import com.example.frontendscreensservice.service.FrontendScreensService;
+import com.example.screensservice.model.dto.FrontendScreenDto;
+import com.example.screensservice.service.FrontendScreensService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/frontend-screens")
+@CrossOrigin(origins = "*")
 public class FrontendScreensController {
 
     private final FrontendScreensService frontendScreensService;

@@ -1,7 +1,8 @@
-package com.example.frontendscreensservice.mapper;
+package com.example.screensservice.mapper;
 
-import com.example.frontendscreensservice.model.dto.FrontendScreenDto;
-import com.example.frontendscreensservice.model.entity.FrontendScreen;
+import com.example.screensservice.model.dto.FrontendScreenDto;
+import com.example.screensservice.model.entity.FrontendScreen;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 public interface FrontendScreensMapper {
     FrontendScreenDto toDto(FrontendScreen frontendScreen);

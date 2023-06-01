@@ -1,6 +1,6 @@
-package com.example.frontendscreensservice.repository;
+package com.example.screensservice.repository;
 
-import com.example.frontendscreensservice.model.entity.FrontendScreen;
+import com.example.screensservice.model.entity.FrontendScreen;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigDecimal;

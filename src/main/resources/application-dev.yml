@@ -8,7 +8,10 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: none
-    show-sql: false
+    show-sql: true
+    properties:
+      hibernate:
+        show_sql: true
 
 
 
