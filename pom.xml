@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>frontend-screens-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>frontend-screens-service</name>
-    <description>frontend-screens-service</description>
+    <name>screens-setups-service</name>
+    <description>screens-setups-service</description>
     <properties>
         <java.version>17</java.version>
     </properties>
