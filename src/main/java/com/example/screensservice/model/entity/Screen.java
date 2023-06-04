@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,11 +15,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "frontend_screens_register", schema = "pitches")
-public class FrontendScreen {
+@Table(name = "frontend_screens_register")
+public class Screen {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "FSR_ID")
     private BigDecimal id;
 
@@ -36,5 +37,12 @@ public class FrontendScreen {
 
     @Column(name = "FSR_SCREEN_FIELDS", columnDefinition = "json")
     private String screenFields;
+
+    @Column(name = "FSR_VARIES")
+    private String varies;
+
+    @OneToMany
+    @JoinColumn(referencedColumnName = "")
+    private List<Field> fields;
 
 }
