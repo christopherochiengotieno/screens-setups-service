@@ -1,334 +1,229 @@
 <div class="container">
 
-    <div class="row">
-        <div class="col-md-4" style="max-width: 290px;" >
-            <p id="title2">Screens Details</p>
-            <div class="card" style="max-width: 290px;">
-                <div class="card-body">
-                  
-                    <form >
-                        <label for="input">ID:</label>
-                        <input type="number"  class="form-control form-control-sm mb-2"  formControlName="" >
-              
-              
-                        <label for="input"><span class="required" >*</span>Name:</label>
-                        <input type="text"  class="form-control form-control-sm mb-1"  formControlName=""  required>
-    
-                        <label for="input"> <span class="required" >*</span>Short Description:</label>
-                        <input type="text"  class="form-control form-control-sm mb-2" formControlName="" required>
-                        
-                        <label for="input">Description:</label>
-                        <input type="text"  class="form-control form-control-sm mb-2" formControlName="" >
+  <div class="row">
+    <div class="col-md-4" style="max-width: 290px;">
+      <p id="title2">Screens Details</p>
+      <div class="card" style="max-width: 290px;">
+        <div class="card-body">
 
-                        <div class="row">
-                            <div class="col-xl-5">
-                              <label class="form-label" for="input"><span class="inputtext">Module:</span></label>
-                            </div>
-                            <div class="col-xl-7">
-                              <select class="form-control form-control-sm mb-1 " formControlName="type">
-                              <option value=""></option>  
-                              <option value="">GIS</option>
-                              <option value="">BANCA</option>
-                            </select>
-                            
-                            </div>
-                          </div>
-                          <br>
-                        <div class="row ">
-                            <div class="col-xl-6"></div>
-                          <div class="col-xl-6 "><button class="btn" id="save" >Save</button></div>
-                        </div>
-                      </form>
-                      
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <p id="title" class="btn ml-4 mt-1 ">Fields</p>
-            <ul class="nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" data-toggle="modal" data-target="#exampleModalCenter">+Add</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#addModal" >Edit</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" >Delete</a>
-              </li>
-            </ul>
-         
+          <label for="screenSelection">select screen</label>-->
+          <select id="screenSelection" (change)="selectScreen($event)">
+            <option value=""></option>
+            <option *ngFor="let screen of screens" value="{{screen.id}}">{{screen.screenName}}</option>
+          </select>
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Fields</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <form >
-                      <div class="row">
-                       <div class="col-xl-6">
-                             <div class="row">
-                               <div class="col-xl-4">
-                                 <label class="form-label" for="input">Id:</label>
-                               </div>
-                               <div class="col-xl-8">
-                                 <input type="text" class="form-control form-control-sm mb-1" formControlName="">
-                               </div>
-                               </div>
-                               <br>
-                               <div class="row">
-                                 <div class="col-xl-4">
-                                   <label class="form-label" for="input">Name:</label>
-                                 </div>
-                                 <div class="col-xl-8">
-                                   <input type="text" class="form-control form-control-sm mb-1" formControlName="" >
-                                 </div>
-                               </div>
-                               <br>
-                               <div class="row">
-                                 <div class="col-xl-4">
-                                   <label class="form-label" for="input">Label:</label>
-                                 </div>
-                                 <div class="col-xl-8">
-                                   <input type="text" class="form-control form-control-sm mb-1" formControlName="" >
-                                 </div>
-                               </div>
-                               <br>
-                               <div class="row">
-                                 <div class="col-xl-4">
-                                   <label class="form-label" for="input">Type:</label>
-                                 </div>
-                                 <div class="col-xl-8">
-                                  <select class="form-control form-control-sm mb-1 " formControlName="type">
-                                      <option value=""></option>  
-                                      <option value="">text</option>
-                                      <option value="">text</option>
-                                    </select>                                </div>
-                               </div>
-                               <br>
-                               <div class="row">
-                                  <div class="col-xl-4">
-                                    <label class="form-label" for="input">Default Value</label>
-                                  </div>
-                                  <div class="col-xl-8">
-                                    <input type="text" class="form-control form-control-sm mb-1" formControlName="" required  >
-                                  </div>
-                                  </div>
-                                  <br>
-                         </div>
-                 
-                       <div class="col-xl-6">
-                           <div class="row">
-                             <div class="col-xl-4">
-                               <label class="form-label" for="input"><span class="inputtext">Is required:</span></label>
-                             </div>
-                             <div class="col-xl-8">
-                              <select class="form-control form-control-sm mb-1 " formControlName="type">
-                                  <option value=""></option>  
-                                  <option value="">Yes</option>
-                                  <option value="">No</option>
-                                </select>                               </div>
-                         </div>
-                         <br>
-                         <div class="row">
-                           <div class="col-xl-4">
-                             <label class="form-label" for="input"><span class="inputtext">Placeholder:</span></label>
-                           </div>
-                           <div class="col-xl-8">
-                             <input class="form-control form-control-sm mb-1" formControlName="">
-                           </div>
-                       </div>
-                       <br>
-                       <div class="row">
-                          <div class="col-xl-4">
-                            <label class="form-label" for="input"><span class="inputtext">Tool tip:</span></label>
-                          </div>
-                          <div class="col-xl-8">
-                            <input class="form-control form-control-sm mb-1" formControlName="">
-                          </div>
-                      </div>
-                      <br>
-                      <div class="row">
-                          <div class="col-xl-4">
-                            <label class="form-label" for="input"><span class="inputtext">Max</span></label>
-                          </div>
-                          <div class="col-xl-8">
-                            <input class="form-control form-control-sm mb-1" formControlName="">
-                          </div>
-                      </div>
-                      <br>
-                      <div class="row">
-                          <div class="col-xl-4">
-                            <label class="form-label" for="input"><span class="inputtext">Min:</span></label>
-                          </div>
-                          <div class="col-xl-8">
-                            <input class="form-control form-control-sm mb-1" formControlName="">
-                          </div>
-                      </div>
-                       </div>
-                      </div>
-                     </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
+          <form [formGroup]="classesForm" (ngSubmit)="saveOrUpdateClass()">
+            <label for="id">ID:</label>
+            <input id="id" type="number" class="form-control form-control-sm mb-2" formControlName="id">
+
+
+            <label for="name"><span class="required">*</span>Name:</label>
+            <input id="name" type="text" class="form-control form-control-sm mb-1" formControlName="name" required>
+
+            <label for="shortDescription"> <span class="required">*</span>Short Description:</label>
+            <input id="shortDescription" type="text" class="form-control form-control-sm mb-2"
+                   formControlName="shortDescription"
+                   required>
+
+            <label for="description">Description:</label>
+            <input id="description" type="text" class="form-control form-control-sm mb-2" formControlName="description">
+
+            <div class="row">
+              <div class="col-xl-5">
+                <label for="module" class="form-label"><span class="inputtext">Module:</span></label>
+              </div>
+              <div class="col-xl-7">
+                <select id="module" class="form-control form-control-sm mb-1 " formControlName="module">
+                  <option value=""></option>
+                  <option value="GIS">GIS</option>
+                  <option value="BANCA">BANCA</option>
+                </select>
+
               </div>
             </div>
-            <p-table>
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Label</th>
-                            <th>Type</th>
-                            <th style="max-width:100px">Default Value</th>
-                            <th style="max-width:100px">Is required</th>
-                            <th>Placeholder</th>
-                            <th>Tooltip</th>
-                            <th>Max</th>
-                            <th>Min</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-rate>
-                        <tr >
-                            <td>{{rate.minimum_days}}</td>
-                            <td>{{rate.maximum_days}}</td>
-                            <td>{{rate.annual_premium_rate}}</td>
-                            <td>{{rate.rate_division_factor}}</td>
-                             <td>{{rate.date_with_effect_from}}</td>
-                            <td>{{rate.date_with_effect_to}}</td>
-                            
-                        </tr>
-                    </ng-template>
-                </p-table>
-            <!-- <div class="card">
-                <div class="card-body">
-                    <form >
-                        <div class="row">
-                         
-                         <div class="col-xl-6">
-                               <div class="row">
-                                 <div class="col-xl-4">
-                                   <label class="form-label" for="input">Id:</label>
-                                 </div>
-                                 <div class="col-xl-8">
-                                   <input type="text" class="form-control form-control-sm mb-1" formControlName="">
-                                 </div>
-                                 </div>
-                                 <br>
-                                 <div class="row">
-                                   <div class="col-xl-4">
-                                     <label class="form-label" for="input">Name:</label>
-                                   </div>
-                                   <div class="col-xl-8">
-                                     <input type="text" class="form-control form-control-sm mb-1" formControlName="" >
-                                   </div>
-                                 </div>
-                                 <br>
-                                 <div class="row">
-                                   <div class="col-xl-4">
-                                     <label class="form-label" for="input">Label:</label>
-                                   </div>
-                                   <div class="col-xl-8">
-                                     <input type="text" class="form-control form-control-sm mb-1" formControlName="" >
-                                   </div>
-                                 </div>
-                                 <br>
-                                 <div class="row">
-                                   <div class="col-xl-4">
-                                     <label class="form-label" for="input">Type:</label>
-                                   </div>
-                                   <div class="col-xl-8">
-                                    <select class="form-control form-control-sm mb-1 " formControlName="type">
-                                        <option value=""></option>  
-                                        <option value="">text</option>
-                                        <option value="">text</option>
-                                      </select>                                </div>
-                                 </div>
-                                 <br>
-                                 <div class="row">
-                                    <div class="col-xl-4">
-                                      <label class="form-label" for="input">Default Value</label>
-                                    </div>
-                                    <div class="col-xl-8">
-                                      <input type="text" class="form-control form-control-sm mb-1" formControlName="" required  >
-                                    </div>
-                                    </div>
-                                    <br>
-                           </div>
-                   
-                         <div class="col-xl-6">
-                             <div class="row">
-                               <div class="col-xl-4">
-                                 <label class="form-label" for="input"><span class="inputtext">Is required:</span></label>
-                               </div>
-                               <div class="col-xl-8">
-                                <select class="form-control form-control-sm mb-1 " formControlName="type">
-                                    <option value=""></option>  
-                                    <option value="">Yes</option>
-                                    <option value="">No</option>
-                                  </select>                               </div>
-                           </div>
-                           <br>
-                           <div class="row">
-                             <div class="col-xl-4">
-                               <label class="form-label" for="input"><span class="inputtext">Placeholder:</span></label>
-                             </div>
-                             <div class="col-xl-8">
-                               <input class="form-control form-control-sm mb-1" formControlName="">
-                             </div>
-                         </div>
-                         <br>
-                         <div class="row">
-                            <div class="col-xl-4">
-                              <label class="form-label" for="input"><span class="inputtext">Tool tip:</span></label>
-                            </div>
-                            <div class="col-xl-8">
-                              <input class="form-control form-control-sm mb-1" formControlName="">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-xl-4">
-                              <label class="form-label" for="input"><span class="inputtext">Max</span></label>
-                            </div>
-                            <div class="col-xl-8">
-                              <input class="form-control form-control-sm mb-1" formControlName="">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-xl-4">
-                              <label class="form-label" for="input"><span class="inputtext">Min:</span></label>
-                            </div>
-                            <div class="col-xl-8">
-                              <input class="form-control form-control-sm mb-1" formControlName="">
-                            </div>
-                        </div>
-                         </div>
-                        </div>
-                       </form>
-                       <div class="row ">
-                        <div class="col-xl-6"></div>
-                        <div class="col-xl-6 ">
-                            <div class="row">
-                                <div class="col-xl-6"></div>
-                                <div class="col-xl-6">
-                                    <button class="btn" id="save" >Save</button>
-                                </div>
-                            </div>
-                        </div>
-                      </div>
-                </div>
-            </div> -->
-        </div>
+            <br>
+            <div class="row ">
+              <div class="col-xl-6"></div>
+              <div class="col-xl-6 ">
+                <button class="btn" id="save">Save</button>
+              </div>
+            </div>
+          </form>
 
+        </div>
+      </div>
     </div>
+    <div class="col-md-8">
+      <p id="title" class="btn ml-4 mt-1 ">Fields</p>
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" data-toggle="modal" data-target="#exampleModalCenter">+Add</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#addModal">Edit</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Delete</a>
+        </li>
+      </ul>
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+           aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Fields</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="row">
+                  <div class="col-xl-6">
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="idInput">Id:</label>
+                      </div>
+                      <div class="col-xl-8">
+                        <input id="idInput" type="text" class="form-control form-control-sm mb-1" formControlName="">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="nameInput">Name:</label>
+                      </div>
+                      <div class="col-xl-8">
+                        <input id="nameInput" type="text" class="form-control form-control-sm mb-1" formControlName="">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="labelInput">Label:</label>
+                      </div>
+                      <div class="col-xl-8">
+                        <input id="labelInput" type="text" class="form-control form-control-sm mb-1" formControlName="">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="typeInput">Type:</label>
+                      </div>
+                      <div class="col-xl-8">
+                        <select id="typeInput" class="form-control form-control-sm mb-1 " formControlName="type">
+                          <option value=""></option>
+                          <option value="text">text</option>
+                          <option value="date">date</option>
+                          <option value="number">number</option>
+                        </select></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="defaultValueInput">Default Value</label>
+                      </div>
+                      <div class="col-xl-8">
+                        <input id="defaultValueInput" type="text" class="form-control form-control-sm mb-1"
+                               formControlName="" required>
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+
+                  <div class="col-xl-6">
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="isRequiredInput"><span
+                          class="inputtext">Is required:</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <select id="isRequiredInput" class="form-control form-control-sm mb-1 " formControlName="type">
+                          <option value="Y">Yes</option>
+                          <option value="N" selected>No</option>
+                        </select></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="placeholderInput"><span
+                          class="inputtext">Placeholder:</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <input id="placeholderInput" class="form-control form-control-sm mb-1" formControlName="">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="toolTipInput"><span class="inputtext">Tool tip:</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <input id="toolTipInput" class="form-control form-control-sm mb-1" formControlName="">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="maxInput"><span class="inputtext">Max</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <input id="maxInput" type="number" class="form-control form-control-sm mb-1" formControlName="">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="minInput"><span class="inputtext">Min:</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <input id="minInput" type="number" class="form-control form-control-sm mb-1" formControlName="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p-table>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Label</th>
+            <th>Type</th>
+            <th style="max-width:100px">Default Value</th>
+            <th style="max-width:100px">Is required</th>
+            <th>Placeholder</th>
+            <th>Tooltip</th>
+            <th>Max</th>
+            <th>Min</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rate>
+          <tr>
+            <td>{{rate.minimum_days}}</td>
+            <td>{{rate.maximum_days}}</td>
+            <td>{{rate.annual_premium_rate}}</td>
+            <td>{{rate.rate_division_factor}}</td>
+            <td>{{rate.date_with_effect_from}}</td>
+            <td>{{rate.date_with_effect_to}}</td>
+
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+
+  </div>
 </div>
