@@ -11,7 +11,7 @@ export class ScreenSetupsService {
   constructor(private http: HttpClient) {
   }
 
-  getScreensSetups(): Observable<Screen[]> {
-    return this.http.get<Screen[]>("http://localhost:9000/api/v1/screens");
+  getScreensSetups(): Observable<any> {
+    return this.http.get<any>("http://localhost:9000/api/v1/screens");
   }
 }

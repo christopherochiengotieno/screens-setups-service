@@ -3,18 +3,45 @@
   <div class="row">
     <div class="col-md-4" style="max-width: 290px;">
       <p id="title2">Screens Details</p>
-      <div class="card" style="max-width: 290px;">
+      <div>
+        <button [ngClass]="showViewOrAddSection === 'VIEW' ? selectedButton : ''"
+                (click)="toggleBetweenAddOrViewClassesSection('VIEW')" style="width: 50%">List
+        </button>
+        <button [ngClass]="showViewOrAddSection === 'ADD' ? selectedButton : ''"
+                (click)="toggleBetweenAddOrViewClassesSection('ADD')" style="width: 50%">Add/Edit
+        </button>
+      </div>
+      <div class="card" style="max-width: 290px;" *ngIf="showViewOrAddSection === 'VIEW' && screens.length > 0">
+        <div class="card-body">
+          <p-table selectionMode="single" (onRowSelect)="onScreenSelected($event)" [tableStyle]="{'min-width': '100%'}"
+                   [value]="screens" styleClass="p-datatable-sm p-datatable-gridlines" [(selection)]="selectedScreen">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Screens</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-screen>
+              <tr [pSelectableRow]="screen">
+                <td>{{screen.screenName}}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+      <div class="card" style="max-width: 290px;" *ngIf="showViewOrAddSection === 'ADD'">
         <div class="card-body">
 
-          <label for="screenSelection">select screen</label>-->
-          <select id="screenSelection" (change)="selectScreen($event)">
+          <label for="screenSelection">select screen</label>
+          <select id="screenSelection" (change)="selectScreen($event)"
+                  style="min-height: 30px; width: 220px; text-align: left; padding-left: 5px">
             <option value=""></option>
             <option *ngFor="let screen of screens" value="{{screen.id}}">{{screen.screenName}}</option>
           </select>
 
           <form [formGroup]="classesForm" (ngSubmit)="saveOrUpdateClass()">
             <label for="id">ID:</label>
-            <input id="id" type="number" class="form-control form-control-sm mb-2" formControlName="id">
+            <input id="id" readonly type="number" class="form-control form-control-sm mb-2"
+                   formControlName="id">
 
 
             <label for="name"><span class="required">*</span>Name:</label>
@@ -42,11 +69,9 @@
               </div>
             </div>
             <br>
-            <div class="row ">
-              <div class="col-xl-6"></div>
-              <div class="col-xl-6 ">
+            <div class="row action-section">
+                <button class="btn" id="clear" style="color: #00529B; font-weight: bolder">Clear</button>
                 <button class="btn" id="save">Save</button>
-              </div>
             </div>
           </form>
 
@@ -54,20 +79,6 @@
       </div>
     </div>
     <div class="col-md-8">
-      <p id="title" class="btn ml-4 mt-1 ">Fields</p>
-      <ul class="nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" data-toggle="modal" data-target="#exampleModalCenter">+Add</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#addModal">Edit</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">Delete</a>
-        </li>
-      </ul>
-
-
       <!-- Modal -->
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -195,33 +206,58 @@
           </div>
         </div>
       </div>
-      <p-table>
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Label</th>
-            <th>Type</th>
-            <th style="max-width:100px">Default Value</th>
-            <th style="max-width:100px">Is required</th>
-            <th>Placeholder</th>
-            <th>Tooltip</th>
-            <th>Max</th>
-            <th>Min</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-rate>
-          <tr>
-            <td>{{rate.minimum_days}}</td>
-            <td>{{rate.maximum_days}}</td>
-            <td>{{rate.annual_premium_rate}}</td>
-            <td>{{rate.rate_division_factor}}</td>
-            <td>{{rate.date_with_effect_from}}</td>
-            <td>{{rate.date_with_effect_to}}</td>
+      <div>
 
-          </tr>
-        </ng-template>
-      </p-table>
+        <div class="card" style="max-width: 100%; margin-top: 45px">
+          <div class="card-header">
+            <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" data-toggle="modal" data-target="#exampleModalCenter">+Add</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" data-target="#addModal">Edit</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">Delete</a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body" *ngIf="selectedScreen">
+            <p-table [value]="selectedScreen.fields" [tableStyle]="{ 'min-width': '50rem' }"
+                     styleClass="p-datatable-sm p-datatable-gridlines" selectionMode="single"
+                     [(selection)]="selectedField" dataKey="id" (onRowSelect)="onFieldSelected($event)">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Label</th>
+                  <th>Type</th>
+                  <th>Control Name</th>
+                  <th style="max-width:100px">Default Value</th>
+                  <th style="max-width:100px">Is required</th>
+                  <th>Placeholder</th>
+                  <th>Tooltip</th>
+                  <th>Max</th>
+                  <th>Min</th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-field>
+                <tr [pSelectableRow]="field">
+                  <td style="min-width: 200px">{{field.label}}</td>
+                  <td>{{field.type}}</td>
+                  <td>{{field.name}}</td>
+                  <td>{{field.defaultValue}}</td>
+                  <td>{{field.isMandatory}}</td>
+                  <td>{{field.placeholder}}</td>
+                  <td style="min-width: 200px">{{field.toolTip}}</td>
+                  <td>{{field.max}}</td>
+                  <td>{{field.min}}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+
+      </div>
     </div>
 
 

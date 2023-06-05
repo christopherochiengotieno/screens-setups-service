@@ -1,54 +1,62 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
-.container{
-    margin-top: 50px;
+
+.container {
+  margin-top: 50px;
 }
-#title1{
-    
-    font-style: normal;
-    font-weight: 700;
-    font-size: 17px;
-    line-height: 29px;
-    color: #00529B;
+
+#title1 {
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 29px;
+  color: #00529B;
 }
-#title2{
-    
-    font-style: normal;
-    font-weight: 700;
-    font-size: 17px;
-    line-height: 29px;
-    color: #00529B;
+
+#title2 {
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 29px;
+  color: #00529B;
 }
-.title3{
-   
-    background-color: #00529B;
-    width: 70px;
-    height: 30px;
-    align-items: center;
-    border-radius: 4px;
-    color:#FFFFFF;
+
+.title3 {
+
+  background-color: #00529B;
+  width: 70px;
+  height: 30px;
+  align-items: center;
+  border-radius: 4px;
+  color: #FFFFFF;
 }
-#title{
-    background-color: #00529B;
-    width: 70px;
-    height: 30px;
-    padding-bottom: 30px;
-    border-radius: 4px;
-    color:#FFFFFF;
-    }
+
+#title {
+  background-color: #00529B;
+  width: 70px;
+  height: 30px;
+  padding-bottom: 30px;
+  border-radius: 4px;
+  color: #FFFFFF;
+}
+
 .nav-pills .nav-item .nav-link.active {
-    background-color: #00529B;
-    color:#FFFFFF;
-  }
-  .nav-item{
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 13px;
-    line-height: 17px;
-    color: #00529B;
+  background-color: #00529B;
+  color: #FFFFFF;
 }
-#modalLabel{
+
+.nav-item {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 17px;
+  color: #00529B;
+}
+
+#modalLabel {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 600;
@@ -56,39 +64,48 @@
   line-height: 16px;
   display: flex;
   color: #00529B;
-}  
-#save{
-    background-color:#00529B;
-    color:white;
-    font-size: 12px;
-    font-weight: 700;
-    width: 80px;
-    height: 30px;
-    padding:1px;
-    border-radius: 2px;
-    
 }
-.nav-item{
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 13px;
-    line-height: 17px;
-    color: #00529B;
+
+#save {
+  background-color: #00529B;
+  color: white;
 }
-.modal-title{
-    background-color: #00529B;
-    width: 157px;
-    height: 30px;
-    
-    border-radius: 4px;
-    color:#FFFFFF;
-    }
-.form-label{
+.action-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto 5px
+}
+
+.nav-item {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 17px;
+  color: #00529B;
+}
+
+.modal-title {
+  background-color: #00529B;
+  width: 157px;
+  height: 30px;
+
+  border-radius: 4px;
+  color: #FFFFFF;
+}
+
+.form-label {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 17px;
- 
+
+}
+
+.selectedButton {
+  background-color: #00529B;
+  color: white;
+  font-weight: bolder;
 }
