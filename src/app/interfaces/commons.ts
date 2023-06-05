@@ -1,5 +1,5 @@
 export interface Field {
-  id: number,
+  id ?: number ,
   defaultValue: string,
   name: string,
   min: number,

@@ -18,13 +18,15 @@ export class ScreensComponent implements OnInit {
   showViewOrAddSection : "ADD" | "VIEW" = "VIEW";
   selectedButton: string = 'selectedButton';
   selectedField!: Field | null | undefined;
+  fieldForm !: FormGroup;
 
   constructor(private screenSetupsService: ScreenSetupsService,
               private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.createForm()
+    this.createScreensForm()
+    this.createFieldsForm()
     this.initializeScreenSetupsData();
   }
 
@@ -34,7 +36,7 @@ export class ScreensComponent implements OnInit {
     })
   }
 
-  createForm(): void {
+  createScreensForm(): void {
     this.classesForm = this.formBuilder.group({
       id: [''],
       screenName: [''],
@@ -85,5 +87,48 @@ export class ScreensComponent implements OnInit {
       description: [''],
       module: ['']
     })
+  }
+
+  private createFieldsForm() {
+    this.fieldForm = this.formBuilder.group({
+      id: [''],
+      defaultValue: [''],
+      name: [''],
+      min: [''],
+      isMandatory: ['N'],
+      label: [''],
+      max: [''],
+      placeholder: [''],
+      toolTip: [''],
+      type: ['text'],
+      screenId: ['']
+    })
+  }
+
+  clearFieldsEntry() : void {
+    this.fieldForm.patchValue({
+      id: [''],
+      defaultValue: [''],
+      name: [''],
+      min: [''],
+      isMandatory: ['N'],
+      label: [''],
+      max: [''],
+      placeholder: [''],
+      toolTip: [''],
+      type: ['text'],
+      screenId: ['']
+    })
+  }
+  saveOrUpdateField() {
+
+    if (this.selectedScreen && this.selectedScreen?.id !== undefined )
+    {
+      let fields: Field[] = [this.fieldForm.value];
+      this.screenSetupsService.addFieldToScreen(this.selectedScreen.id, fields).subscribe(res => {
+            this.initializeScreenSetupsData();
+            this.clearFieldsEntry()
+          });
+    }
   }
 }
