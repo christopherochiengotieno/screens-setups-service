@@ -37,7 +37,7 @@ export class ScreensComponent implements OnInit {
   createForm(): void {
     this.classesForm = this.formBuilder.group({
       id: [''],
-      name: [''],
+      screenName: [''],
       shortDescription: [''],
       description: [''],
       module: ['']
@@ -50,10 +50,10 @@ export class ScreensComponent implements OnInit {
       this.selectedScreen = selectedScreens[0];
       this.classesForm.patchValue( {
         id: this.selectedScreen.id + "",
-        name: this.selectedScreen.screenName,
+        screenName: this.selectedScreen.screenName,
         shortDescription: this.selectedScreen.shortDescription,
         description: this.selectedScreen.description,
-        module: this.selectedScreen.module + ""
+        module: this.selectedScreen.module == 1 ? "GIS" : this.selectedScreen.module == 2 ? "BANCA" : "S"
       })
 
       // reset the selected field
@@ -62,7 +62,7 @@ export class ScreensComponent implements OnInit {
   }
 
   saveOrUpdateClass() {
-    console.log(this.classesForm.value)
+    this.screenSetupsService.saveScreen(this.classesForm.value).subscribe(res => this.screens.push(res));
   }
 
   toggleBetweenAddOrViewClassesSection(option: "ADD" | "VIEW") {
@@ -80,7 +80,7 @@ export class ScreensComponent implements OnInit {
   clearBtnClicked() {
     this.classesForm.patchValue({
       id: [''],
-      name: [''],
+      screenName: [''],
       shortDescription: [''],
       description: [''],
       module: ['']

@@ -12,10 +12,10 @@ export interface Field {
 }
 
 export interface Screen {
-  id: number,
+  id ?: number,
   screenName: string,
   shortDescription:string,
   description:string,
   module:number,
-  fields: Field []
+  fields : Field []
 }

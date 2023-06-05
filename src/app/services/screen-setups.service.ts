@@ -8,10 +8,23 @@ import {Screen} from "../interfaces/commons";
 })
 export class ScreenSetupsService {
 
+  screen_api = "http://localhost:9000/api/v1/screens";
+  private options: any;
+
   constructor(private http: HttpClient) {
   }
 
-  getScreensSetups(): Observable<any> {
-    return this.http.get<any>("http://localhost:9000/api/v1/screens");
+  getScreensSetups(): Observable<Screen[]> {
+    return this.http.get<any>(this.screen_api);
+  }
+
+  saveScreen(newScreen: Screen):Observable<Screen> {
+    /*this.options = {
+      resp
+    }*/
+    let options = {headers: {
+        responseType: 'application/json'
+      }};
+    return this.http.post<Screen>(this.screen_api,newScreen,options);
   }
 }
