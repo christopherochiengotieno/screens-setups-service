@@ -70,8 +70,8 @@
             </div>
             <br>
             <div class="row action-section">
-                <button class="btn" id="clear" style="color: #00529B; font-weight: bolder">Clear</button>
-                <button class="btn" id="save">Save</button>
+                <button (click)="clearBtnClicked()" class="btn" id="clear" style="color: #00529B; font-weight: bolder">Clear</button>
+                <button class="btn" type="submit" id="save">Save</button>
             </div>
           </form>
 
@@ -210,14 +210,15 @@
 
         <div class="card" style="max-width: 100%; margin-top: 45px">
           <div class="card-header">
+            <h5>Fields</h5>
             <ul class="nav">
-              <li class="nav-item">
+              <li class="nav-item" *ngIf="selectedScreen" >
                 <a class="nav-link active" aria-current="page" data-toggle="modal" data-target="#exampleModalCenter">+Add</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" *ngIf="selectedField">
                 <a class="nav-link" data-toggle="modal" data-target="#addModal">Edit</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" *ngIf="selectedField">
                 <a class="nav-link">Delete</a>
               </li>
             </ul>

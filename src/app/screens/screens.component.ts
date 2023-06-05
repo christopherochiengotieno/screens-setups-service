@@ -17,7 +17,7 @@ export class ScreensComponent implements OnInit {
   classesForm!: FormGroup;
   showViewOrAddSection : "ADD" | "VIEW" = "VIEW";
   selectedButton: string = 'selectedButton';
-  selectedField!: Field;
+  selectedField!: Field | null | undefined;
 
   constructor(private screenSetupsService: ScreenSetupsService,
               private formBuilder: FormBuilder) {
@@ -55,6 +55,9 @@ export class ScreensComponent implements OnInit {
         description: this.selectedScreen.description,
         module: this.selectedScreen.module + ""
       })
+
+      // reset the selected field
+      this.selectedField = undefined;
     }
   }
 
@@ -72,5 +75,15 @@ export class ScreensComponent implements OnInit {
 
   onScreenSelected(event: any) {
     console.log()
+  }
+
+  clearBtnClicked() {
+    this.classesForm.patchValue({
+      id: [''],
+      name: [''],
+      shortDescription: [''],
+      description: [''],
+      module: ['']
+    })
   }
 }
