@@ -1,18 +1,20 @@
 package com.example.screensservice.model.dto;
 
-import jakarta.persistence.Column;
 import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
-public class FrontendScreenDto {
+public class ScreenDto {
     private BigDecimal id;
     private String screenName;
     private String shortDescription;
     private String description;
     private BigDecimal targetSystem;
     private Object screenFields;
+    private List<FieldDto> fields = new ArrayList<>();
 }
