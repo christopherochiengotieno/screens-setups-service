@@ -25,4 +25,12 @@ export class ScreenSetupsService {
   addFieldToScreen(screenId: number, fields: Field[]): Observable<any> {
     return this.http.post(this.field_api, fields, {headers: {responseType: 'application/json', 'Access-Control-Allow-Origin': '*'}, params: {screenId: screenId}} )
   }
+
+  deleteFieldById(id?: number) {
+    return this.http.delete(this.field_api + "/" + id);
+  }
+
+  getScreenById(screenId: number):Observable<Screen> {
+    return this.http.get<Screen>(this.screen_api + "/" + screenId);
+  }
 }

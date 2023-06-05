@@ -3,12 +3,14 @@ import {ScreenSetupsService} from "../services/screen-setups.service";
 import {Field, Screen} from "../interfaces/commons";
 import {Subject} from "rxjs";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
 
 
 @Component({
   selector: 'app-screens',
   templateUrl: './screens.component.html',
-  styleUrls: ['./screens.component.scss']
+  styleUrls: ['./screens.component.scss'],
+  providers: [ConfirmationService, MessageService]
 })
 export class ScreensComponent implements OnInit {
 
@@ -21,7 +23,9 @@ export class ScreensComponent implements OnInit {
   fieldForm !: FormGroup;
 
   constructor(private screenSetupsService: ScreenSetupsService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private confirmationService: ConfirmationService,
+              private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -63,8 +67,22 @@ export class ScreensComponent implements OnInit {
     }
   }
 
-  saveOrUpdateClass() {
-    this.screenSetupsService.saveScreen(this.classesForm.value).subscribe(res => this.screens.push(res));
+  saveOrUpdateScreen() {
+    this.screenSetupsService.saveScreen(this.classesForm.value).subscribe(res => {
+      this.screens.push(res);
+      this.clearScreenEntry();
+      this.showViewOrAddSection = "VIEW";
+    });
+  }
+
+  private clearScreenEntry() {
+    this.classesForm.patchValue({
+      id: [''],
+      screenName: [''],
+      shortDescription: [''],
+      description: [''],
+      module: ['']
+    })
   }
 
   toggleBetweenAddOrViewClassesSection(option: "ADD" | "VIEW") {
@@ -130,5 +148,30 @@ export class ScreensComponent implements OnInit {
             this.clearFieldsEntry()
           });
     }
+  }
+
+  deleteFieldById(field?: Field) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete ' + this.selectedField?.label + ' from ' + this.selectedScreen.screenName + '?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.screenSetupsService.deleteFieldById(field?.id).subscribe(res => {
+          this.initializeScreenSetupsData();
+          this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Field successfully deleted' });
+        });
+
+      },
+      reject: (type: any) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+            break;
+          case ConfirmEventType.CANCEL:
+            this.messageService.add({ severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled' });
+            break;
+        }
+      }
+    })
   }
 }

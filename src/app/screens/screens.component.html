@@ -38,14 +38,15 @@
             <option *ngFor="let screen of screens" value="{{screen.id}}">{{screen.screenName}}</option>
           </select>
 
-          <form [formGroup]="classesForm" (ngSubmit)="saveOrUpdateClass()">
+          <form [formGroup]="classesForm" (ngSubmit)="saveOrUpdateScreen()">
             <label for="id">ID:</label>
             <input id="id" readonly type="number" class="form-control form-control-sm mb-2"
                    formControlName="id">
 
 
             <label for="screenName"><span class="required">*</span>Screen Name:</label>
-            <input id="screenName" type="text" class="form-control form-control-sm mb-1" formControlName="screenName" required>
+            <input id="screenName" type="text" class="form-control form-control-sm mb-1" formControlName="screenName"
+                   required>
 
             <label for="shortDescription"> <span class="required">*</span>Short Description:</label>
             <input id="shortDescription" type="text" class="form-control form-control-sm mb-2"
@@ -70,8 +71,10 @@
             </div>
             <br>
             <div class="row action-section">
-                <button (click)="clearBtnClicked()" class="btn" id="clear" style="color: #00529B; font-weight: bolder">Clear</button>
-                <button class="btn" type="submit" id="save">Save</button>
+              <button (click)="clearBtnClicked()" class="btn" id="clear" style="color: #00529B; font-weight: bolder">
+                Clear
+              </button>
+              <button class="btn" type="submit" id="save">Save</button>
             </div>
           </form>
 
@@ -85,7 +88,8 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Add Field Details</h5>
+              <h5 *ngIf="selectedScreen" class="modal-title" id="exampleModalLongTitle">Add field details to {{selectedScreen.screenName}}</h5>
+              <h5 *ngIf="!selectedScreen" class="modal-title" >Add field details</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -99,7 +103,8 @@
                         <label class="form-label" for="idInput">Id:</label>
                       </div>
                       <div class="col-xl-8">
-                        <input readonly id="idInput" type="text" class="form-control form-control-sm mb-1" formControlName="id">
+                        <input readonly id="idInput" type="text" class="form-control form-control-sm mb-1"
+                               formControlName="id">
                       </div>
                     </div>
                     <br>
@@ -108,7 +113,8 @@
                         <label class="form-label" for="nameInput">Control Name:</label>
                       </div>
                       <div class="col-xl-8">
-                        <input id="nameInput" type="text" class="form-control form-control-sm mb-1" formControlName="name">
+                        <input id="nameInput" type="text" class="form-control form-control-sm mb-1"
+                               formControlName="name">
                       </div>
                     </div>
                     <br>
@@ -117,7 +123,8 @@
                         <label class="form-label" for="labelInput">Label:</label>
                       </div>
                       <div class="col-xl-8">
-                        <input id="labelInput" type="text" class="form-control form-control-sm mb-1" formControlName="label">
+                        <input id="labelInput" type="text" class="form-control form-control-sm mb-1"
+                               formControlName="label">
                       </div>
                     </div>
                     <br>
@@ -153,7 +160,8 @@
                           class="inputtext">Is required:</span></label>
                       </div>
                       <div class="col-xl-8">
-                        <select id="isRequiredInput" class="form-control form-control-sm mb-1 " formControlName="isMandatory">
+                        <select id="isRequiredInput" class="form-control form-control-sm mb-1 "
+                                formControlName="isMandatory">
                           <option value="Y">Yes</option>
                           <option value="N" selected>No</option>
                         </select></div>
@@ -165,7 +173,8 @@
                           class="inputtext">Placeholder:</span></label>
                       </div>
                       <div class="col-xl-8">
-                        <input id="placeholderInput" class="form-control form-control-sm mb-1" formControlName="placeholder">
+                        <input id="placeholderInput" class="form-control form-control-sm mb-1"
+                               formControlName="placeholder">
                       </div>
                     </div>
                     <br>
@@ -183,7 +192,8 @@
                         <label class="form-label" for="maxInput"><span class="inputtext">Max</span></label>
                       </div>
                       <div class="col-xl-8">
-                        <input id="maxInput" type="number" class="form-control form-control-sm mb-1" formControlName="max">
+                        <input id="maxInput" type="number" class="form-control form-control-sm mb-1"
+                               formControlName="max">
                       </div>
                     </div>
                     <br>
@@ -192,7 +202,8 @@
                         <label class="form-label" for="minInput"><span class="inputtext">Min:</span></label>
                       </div>
                       <div class="col-xl-8">
-                        <input id="minInput" type="number" class="form-control form-control-sm mb-1" formControlName="min">
+                        <input id="minInput" type="number" class="form-control form-control-sm mb-1"
+                               formControlName="min">
                       </div>
                     </div>
                   </div>
@@ -212,19 +223,24 @@
         <div class="card" style="max-width: 100%; margin-top: 45px">
           <div class="card-header">
             <h5>Fields</h5>
-            <ul class="nav">
-<!--              <li class="nav-item" *ngIf="selectedScreen" >-->
-              <li class="nav-item" >
-                <a class="nav-link active" aria-current="page" data-toggle="modal" data-target="#exampleModalCenter">+Add</a>
-              </li>
-              <li class="nav-item" *ngIf="selectedField">
-                <a class="nav-link" data-toggle="modal" data-target="#addModal">Edit</a>
-              </li>
-              <li class="nav-item" *ngIf="selectedField">
-                <a class="nav-link">Delete</a>
-              </li>
-            </ul>
+            <div style="display: flex; justify-content: space-between">
+              <ul class="nav">
+                <!--              <li class="nav-item" *ngIf="selectedScreen" >-->
+                <li class="nav-item" style="border: 1px solid #00529B; border-radius: 5px; margin: auto 5px">
+                  <a class="nav-link active" aria-current="page" data-toggle="modal" data-target="#exampleModalCenter">+Add field</a>
+                </li>
+                <li class="nav-item" *ngIf="selectedField" style="border: 1px solid #00529B; border-radius: 5px; margin: auto 5px">
+                  <a class="nav-link" data-toggle="modal" data-target="#addModal">Edit field</a>
+                </li>
+                <li class="nav-item" *ngIf="selectedField" style="border: 1px solid #00529B; border-radius: 5px; margin: auto 5px">
+                  <a (click)="deleteFieldById(selectedField)" class="nav-link">-Delete field</a>
+                </li>
+              </ul>
+              <button *ngIf="selectedScreen" [routerLink]="['/preview']" [queryParams]="{screenId: selectedScreen.id}" class="btn" style="background-color: #00529B; color: white; border-radius: 5px">Preview</button>
+            </div>
           </div>
+          <p-toast></p-toast>
+          <p-confirmDialog [style]="{'max-width': '400px'}"></p-confirmDialog>
           <div class="card-body" *ngIf="selectedScreen">
             <p-table [value]="selectedScreen.fields" [tableStyle]="{ 'min-width': '50rem' }"
                      styleClass="p-datatable-sm p-datatable-gridlines" selectionMode="single"
