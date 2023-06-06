@@ -40,7 +40,7 @@ export class PreviewComponent implements OnInit{
 
       let controls = {};
       fields.forEach(field => {
-        controls= {...controls, [field.name]: new FormControl('')}
+        controls= {...controls, [field.name]: new FormControl({value: '', disabled: field.isEnabled == 'N'})}
       })
 
       this.classesForm = new FormGroup<any>(controls) // instantiate the reactive form controls

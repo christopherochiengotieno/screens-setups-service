@@ -9,7 +9,10 @@ export interface Field {
   placeholder: string,
   toolTip: string,
   type: "text" | "number" | "date",
-  screenId: number
+  screenId: number,
+  isEnabled: "Y" | "N",
+  isHidden: "Y" | "N",
+  isReadOnly: "Y" | "N"
 }
 
 export interface Screen {

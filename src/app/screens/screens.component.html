@@ -31,10 +31,10 @@
       <div class="card" style="max-width: 290px;" *ngIf="showViewOrAddSection === 'ADD'">
         <div class="card-body">
 
-          <label for="screenSelection">select screen</label>
+          <label for="screenSelection">Selected Screen</label>
           <select id="screenSelection" (change)="selectScreen($event)"
                   style="min-height: 30px; width: 220px; text-align: left; padding-left: 5px">
-            <option value=""></option>
+            <option selected disabled hidden="hidden" value="">Choose a Screen</option>
             <option *ngFor="let screen of screens" value="{{screen.id}}">{{screen.screenName}}</option>
           </select>
 
@@ -170,6 +170,45 @@
                     <br>
                     <div class="row">
                       <div class="col-xl-4">
+                        <label class="form-label" for="isEnabledInput"><span
+                          class="inputtext">Is enabled:</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <select id="isEnabledInput" class="form-control form-control-sm mb-1 "
+                                formControlName="isEnabled">
+                          <option value="Y" selected>Yes</option>
+                          <option value="N" >No</option>
+                        </select></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="isHiddenInput"><span
+                          class="inputtext">Is hidden:</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <select id="isHiddenInput" class="form-control form-control-sm mb-1 "
+                                formControlName="isHidden">
+                          <option value="Y" >Yes</option>
+                          <option value="N" selected >No</option>
+                        </select></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="isReadOnlyInput"><span
+                          class="inputtext">Is Read Only:</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <select id="isReadOnlyInput" class="form-control form-control-sm mb-1 "
+                                formControlName="isReadOnly">
+                          <option value="Y" >Yes</option>
+                          <option value="N" selected>No</option>
+                        </select></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
                         <label class="form-label" for="placeholderInput"><span
                           class="inputtext">Placeholder:</span></label>
                       </div>
@@ -211,7 +250,8 @@
                 </div>
                 <div class="modal-footer">
                   <button (click)="clearFieldsEntry()" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" style="background-color: #00529B" class="btn btn-primary">{{selectedField ? 'Update' : 'Save'}}</button>
+                  <button type="submit" style="background-color: #00529B"
+                          class="btn btn-primary">{{selectedField ? 'Update' : 'Save'}}</button>
                 </div>
               </form>
             </div>
@@ -228,7 +268,8 @@
               <ul class="nav">
                 <!--              <li class="nav-item" *ngIf="selectedScreen" >-->
                 <li class="nav-item" style="border: 1px solid #00529B; border-radius: 5px; margin: auto 5px">
-                  <a (click)="clearFieldsEntry()" class="nav-link active" aria-current="page" data-toggle="modal" data-target="#exampleModalCenter">+Add
+                  <a (click)="clearFieldsEntry()" class="nav-link active" aria-current="page" data-toggle="modal"
+                     data-target="#exampleModalCenter">+Add
                     field</a>
                 </li>
                 <li class="nav-item" *ngIf="selectedField"
@@ -256,12 +297,16 @@
                   <th>Label</th>
                   <th>Type</th>
                   <th>Control Name</th>
-                  <th style="max-width:100px">Default Value</th>
                   <th style="max-width:100px">Is required</th>
-                  <th>Placeholder</th>
-                  <th>Tooltip</th>
+                  <th style="max-width:100px">Enabled</th>
+                  <th style="max-width:100px">Hidden</th>
+                  <th style="max-width:100px">Read only</th>
                   <th>Max</th>
                   <th>Min</th>
+                  <th style="max-width:100px">Default Value</th>
+                  <th>Placeholder</th>
+                  <th>Tooltip</th>
+
                 </tr>
               </ng-template>
 
@@ -270,12 +315,16 @@
                   <td style="min-width: 200px">{{field.label}}</td>
                   <td>{{field.type}}</td>
                   <td>{{field.name}}</td>
-                  <td>{{field.defaultValue}}</td>
                   <td>{{field.isMandatory}}</td>
-                  <td>{{field.placeholder}}</td>
-                  <td style="min-width: 200px">{{field.toolTip}}</td>
+                  <td>{{field.isEnabled}}</td>
+                  <td>{{field.isHidden}}</td>
+                  <td>{{field.isReadOnly}}</td>
                   <td>{{field.max}}</td>
                   <td>{{field.min}}</td>
+                  <td>{{field.defaultValue}}</td>
+                  <td>{{field.placeholder}}</td>
+                  <td style="min-width: 200px">{{field.toolTip}}</td>
+
                 </tr>
               </ng-template>
             </p-table>

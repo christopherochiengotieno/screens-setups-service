@@ -102,7 +102,10 @@ export class ScreensComponent implements OnInit {
       placeholder: this.selectedField?.placeholder,
       toolTip: this.selectedField?.toolTip,
       type: this.selectedField?.type,
-      screenId: this.selectedField?.screenId
+      screenId: this.selectedField?.screenId,
+      isHidden: this.selectedField?.isHidden,
+      isEnabled: this.selectedField?.isEnabled,
+      isReadOnly: this.selectedField?.isReadOnly
     })
   }
 
@@ -132,7 +135,10 @@ export class ScreensComponent implements OnInit {
       placeholder: [''],
       toolTip: [''],
       type: ['text'],
-      screenId: ['']
+      screenId: [''],
+      isEnabled: [''],
+      isHidden: [''],
+      isReadOnly: ['']
     })
   }
 
@@ -148,7 +154,10 @@ export class ScreensComponent implements OnInit {
       placeholder: '',
       toolTip: '',
       type: 'text',
-      screenId: ''
+      screenId: '',
+      isEnabled: '',
+      isHidden: '',
+      isReadOnly: ''
     })
   }
   saveOrUpdateField() {
