@@ -91,6 +91,19 @@ export class ScreensComponent implements OnInit {
 
   onFieldSelected(event: any) {
     console.log(this.selectedField)
+    this.fieldForm.patchValue({
+      id: this.selectedField?.id,
+      defaultValue: this.selectedField?.defaultValue,
+      name: this.selectedField?.name,
+      min: this.selectedField?.min,
+      isMandatory: this.selectedField?.isMandatory,
+      label: this.selectedField?.label,
+      max: this.selectedField?.max,
+      placeholder: this.selectedField?.placeholder,
+      toolTip: this.selectedField?.toolTip,
+      type: this.selectedField?.type,
+      screenId: this.selectedField?.screenId
+    })
   }
 
   onScreenSelected(event: any) {
@@ -125,28 +138,45 @@ export class ScreensComponent implements OnInit {
 
   clearFieldsEntry() : void {
     this.fieldForm.patchValue({
-      id: [''],
-      defaultValue: [''],
-      name: [''],
-      min: [''],
-      isMandatory: ['N'],
-      label: [''],
-      max: [''],
-      placeholder: [''],
-      toolTip: [''],
-      type: ['text'],
-      screenId: ['']
+      id: '',
+      defaultValue: '',
+      name: '',
+      min: '',
+      isMandatory: 'N',
+      label: '',
+      max: '',
+      placeholder: '',
+      toolTip: '',
+      type: 'text',
+      screenId: ''
     })
   }
   saveOrUpdateField() {
 
     if (this.selectedScreen && this.selectedScreen?.id !== undefined )
     {
-      let fields: Field[] = [this.fieldForm.value];
-      this.screenSetupsService.addFieldToScreen(this.selectedScreen.id, fields).subscribe(res => {
-            this.initializeScreenSetupsData();
-            this.clearFieldsEntry()
-          });
+      let field: Field = this.fieldForm.value;
+      let fields: Field[] = [field];
+
+      if (this.selectedField?.id) {
+        // update
+        console.log("Updating field")
+        this.screenSetupsService.updateField(fields).subscribe(res => {
+          this.initializeScreenSetupsData();
+          this.clearFieldsEntry()
+        });
+      } else {
+        console.log("Saving new field")
+        this.screenSetupsService.addFieldToScreen(this.selectedScreen.id, fields).subscribe(res => {
+          this.initializeScreenSetupsData();
+          this.clearFieldsEntry()
+          let newScreenDetails: Screen[] = this.screens.filter(screen => screen.id == this.selectedScreen.id);
+          if (newScreenDetails.length > 0) {
+            this.selectedScreen = newScreenDetails[0]
+          }
+        });
+      }
+
     }
   }
 

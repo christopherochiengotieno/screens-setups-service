@@ -33,4 +33,8 @@ export class ScreenSetupsService {
   getScreenById(screenId: number):Observable<Screen> {
     return this.http.get<Screen>(this.screen_api + "/" + screenId);
   }
+
+  updateField(fields: Field[]) {
+    return this.http.put(this.field_api, fields, {headers: {responseType: 'application/json', 'Access-Control-Allow-Origin': '*'}} )
+  }
 }

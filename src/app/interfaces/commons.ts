@@ -8,7 +8,8 @@ export interface Field {
   max: number,
   placeholder: string,
   toolTip: string,
-  type: "text" | "number" | "date"
+  type: "text" | "number" | "date",
+  screenId: number
 }
 
 export interface Screen {
