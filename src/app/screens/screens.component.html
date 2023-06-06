@@ -139,6 +139,8 @@
                           <option value="text">text</option>
                           <option value="date">date</option>
                           <option value="number">number</option>
+                          <option value="checkbox">checkbox</option>
+                          <option value="select">select</option>
                         </select></div>
                     </div>
                     <br>
@@ -152,6 +154,25 @@
                       </div>
                     </div>
                     <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="maxInput"><span class="inputtext">Max</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <input id="maxInput" type="number" class="form-control form-control-sm mb-1"
+                               formControlName="max">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="minInput"><span class="inputtext">Min:</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <input id="minInput" type="number" class="form-control form-control-sm mb-1"
+                               formControlName="min">
+                      </div>
+                    </div>
                   </div>
 
                   <div class="col-xl-6">
@@ -203,7 +224,7 @@
                         <select id="isReadOnlyInput" class="form-control form-control-sm mb-1 "
                                 formControlName="isReadOnly">
                           <option value="Y" >Yes</option>
-                          <option value="N" selected>No</option>
+                          <option value="N" selected >No</option>
                         </select></div>
                     </div>
                     <br>
@@ -227,25 +248,7 @@
                       </div>
                     </div>
                     <br>
-                    <div class="row">
-                      <div class="col-xl-4">
-                        <label class="form-label" for="maxInput"><span class="inputtext">Max</span></label>
-                      </div>
-                      <div class="col-xl-8">
-                        <input id="maxInput" type="number" class="form-control form-control-sm mb-1"
-                               formControlName="max">
-                      </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                      <div class="col-xl-4">
-                        <label class="form-label" for="minInput"><span class="inputtext">Min:</span></label>
-                      </div>
-                      <div class="col-xl-8">
-                        <input id="minInput" type="number" class="form-control form-control-sm mb-1"
-                               formControlName="min">
-                      </div>
-                    </div>
+
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -266,8 +269,7 @@
             <h5>Fields</h5>
             <div style="display: flex; justify-content: space-between">
               <ul class="nav">
-                <!--              <li class="nav-item" *ngIf="selectedScreen" >-->
-                <li class="nav-item" style="border: 1px solid #00529B; border-radius: 5px; margin: auto 5px">
+                <li *ngIf="selectedScreen" class="nav-item" style="border: 1px solid #00529B; border-radius: 5px; margin: auto 5px">
                   <a (click)="clearFieldsEntry()" class="nav-link active" aria-current="page" data-toggle="modal"
                      data-target="#exampleModalCenter">+Add
                     field</a>
