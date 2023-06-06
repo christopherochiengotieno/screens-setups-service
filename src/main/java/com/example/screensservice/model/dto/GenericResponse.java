@@ -9,4 +9,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class GenericResponse {
     private String message;
+    private String status;
+    private Object [] _embedded;
 }

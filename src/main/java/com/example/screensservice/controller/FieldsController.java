@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/fields")
+@CrossOrigin(origins = "*")
 public class FieldsController {
 
     private final ScreensFieldsService screensFieldsService;
@@ -41,6 +42,12 @@ public class FieldsController {
     public ResponseEntity<GenericResponse> addFieldsToScreen(@RequestParam BigDecimal screenId,
                                                      @RequestBody List<FieldDto> fields) {
         GenericResponse response = screensFieldsService.addFieldToScreen(screenId, fields);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @PutMapping
+    public ResponseEntity<GenericResponse> updateFields(@RequestBody List<FieldDto> fields) {
+        GenericResponse response = screensFieldsService.updateFields(fields);
         return ResponseEntity.ok().body(response);
     }
 }

@@ -14,4 +14,6 @@ public interface ScreensFieldsService {
     FieldDto getFieldById(BigDecimal fieldId);
 
     Boolean deleteFieldById(BigDecimal fieldId);
+
+    GenericResponse updateFields(List<FieldDto> fields);
 }

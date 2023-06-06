@@ -9,6 +9,6 @@ public class MvcHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> exception(Exception e) {
-        return ResponseEntity.ok(e.getMessage());
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }

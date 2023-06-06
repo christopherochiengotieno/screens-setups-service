@@ -6,6 +6,7 @@ import com.example.screensservice.model.dto.GenericResponse;
 import com.example.screensservice.model.entity.Field;
 import com.example.screensservice.repository.FieldRepository;
 import com.example.screensservice.repository.ScreensRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -55,5 +56,22 @@ public class ScreensFieldsServiceImpl implements ScreensFieldsService {
             log.error(e.getMessage());
             return false;
         }
+    }
+
+    @Override
+    @Transactional
+    public GenericResponse updateFields(List<FieldDto> fields) {
+
+        if (fields != null) {
+            fields.forEach(field -> {
+                if(!fieldRepository.existsById(field.getId())) {
+                    new RuntimeException("Field could not be found using the id provided: " + field.getId());
+                } ;
+                fieldRepository.save(fieldMapper.toEntity(field));
+            });
+        } else {
+            throw new RuntimeException("Error, you provided an empty list of fields");
+        }
+        return GenericResponse.builder().message("Field(s) updated successfully").build();
     }
 }
