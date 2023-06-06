@@ -1,0 +1,3 @@
+ALTER TABLE pitches.screen_fields ADD SF_ENABLED VARCHAR(1) DEFAULT 'Y';
+ALTER TABLE pitches.screen_fields ADD SF_HIDDEN VARCHAR(1) DEFAULT 'N';
+ALTER TABLE pitches.screen_fields ADD SF_READ_ONLY VARCHAR(1) DEFAULT 'N';

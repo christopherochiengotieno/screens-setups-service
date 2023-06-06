@@ -54,4 +54,16 @@ public class Field {
 
     @Column( name = "SF_SCREEN_ID")
     private BigDecimal screenId;
+
+    @Column(name = "SF_ENABLED")
+    @Enumerated(EnumType.STRING)
+    private YesNoEnum isEnabled;
+
+    @Column(name = "SF_HIDDEN")
+    @Enumerated(EnumType.STRING)
+    private YesNoEnum isHidden;
+
+    @Column(name = "SF_READ_ONLY")
+    @Enumerated(EnumType.STRING)
+    private YesNoEnum isReadOnly;
 }

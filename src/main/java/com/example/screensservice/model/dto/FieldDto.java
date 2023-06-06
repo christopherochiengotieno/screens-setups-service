@@ -22,4 +22,7 @@ public class FieldDto {
     private String toolTip;
     private ScreenTypeEnum type;
     private BigDecimal screenId;
+    private YesNoEnum isEnabled;
+    private YesNoEnum isHidden;
+    private YesNoEnum isReadOnly;
 }

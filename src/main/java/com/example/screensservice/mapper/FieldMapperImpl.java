@@ -20,6 +20,9 @@ public class FieldMapperImpl implements FieldMapper {
                 .placeholder(field.getPlaceholder())
                 .toolTip(field.getToolTip())
                 .type(field.getType())
+                .isEnabled(field.getIsEnabled())
+                .isHidden(field.getIsHidden())
+                .isReadOnly(field.getIsReadOnly())
                 .build();
     }
 
@@ -37,6 +40,9 @@ public class FieldMapperImpl implements FieldMapper {
                 .placeholder(fieldDto.getPlaceholder())
                 .toolTip(fieldDto.getToolTip())
                 .type(fieldDto.getType())
+                .isEnabled(fieldDto.getIsEnabled())
+                .isHidden(fieldDto.getIsHidden())
+                .isReadOnly(fieldDto.getIsReadOnly())
                 .build();
     }
 }
