@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { ScreensComponent } from './screens/screens.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from "@angular/common/http";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ToastModule} from "primeng/toast";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -18,18 +18,19 @@ import {PreviewComponent} from "./components/preview/preview.component";
     ScreensComponent,
     PreviewComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    TableModule,
-    DialogModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    ConfirmDialogModule,
-    ToastModule,
-    BrowserAnimationsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NgbModule,
+        TableModule,
+        DialogModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        ConfirmDialogModule,
+        ToastModule,
+        BrowserAnimationsModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

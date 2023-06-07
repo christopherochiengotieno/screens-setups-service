@@ -1,7 +1,7 @@
-interface SelectOption {
-  id: number,
+export interface SelectOption {
+  id?: number,
   value: string,
-  text: string,
+  text: string | null,
   isSelected: "Y" | "N",
   isHidden: "Y" | "N",
   isEnabled: "Y" | "N"

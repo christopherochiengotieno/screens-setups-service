@@ -97,8 +97,8 @@
             </div>
             <div class="modal-body">
               <form [formGroup]="fieldForm" (ngSubmit)="saveOrUpdateField()">
-                <div class="row">
-                  <div class="col-xl-6">
+                <div *ngIf="!addSelectOptions" class="row">
+                  <div class="{{showFieldAdvancedSetup ? 'col-xl-6' : 'col-xl-12' }}">
                     <div class="row">
                       <div class="col-xl-4">
                         <label class="form-label" for="idInput">Id:</label>
@@ -156,6 +156,91 @@
                     <br>
                     <div class="row">
                       <div class="col-xl-4">
+                        <label class="form-label" for="placeholderInput"><span
+                          class="inputtext">Placeholder:</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <input id="placeholderInput" class="form-control form-control-sm mb-1"
+                               formControlName="placeholder">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row" style="display: flex; justify-content: space-around; padding: auto 10px">
+                      <button (click)="toggleShowFieldAdvancedSetup()" style="color: #00529B; font-weight: normal;"
+                              class="btn">advanced
+                      </button>
+                      <button (click)="toggleAddSelectOptions()" *ngIf="fieldForm.value.type === 'select'"
+                              style="color: #00529B; font-weight: normal"
+                              class="btn">Add choices
+                      </button>
+                    </div>
+
+                  </div>
+
+                  <div *ngIf="showFieldAdvancedSetup" class="col-xl-6">
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="isRequiredInput"><span
+                          class="inputtext">Required:</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <select id="isRequiredInput" class="form-control form-control-sm mb-1 "
+                                formControlName="isMandatory">
+                          <option value="Y">Yes</option>
+                          <option value="N" selected>No</option>
+                        </select></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="isEnabledInput"><span
+                          class="inputtext">Enabled:</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <select id="isEnabledInput" class="form-control form-control-sm mb-1 "
+                                formControlName="isEnabled">
+                          <option value="Y" selected>Yes</option>
+                          <option value="N">No</option>
+                        </select></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="isHiddenInput"><span
+                          class="inputtext">Hidden:</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <select id="isHiddenInput" class="form-control form-control-sm mb-1 "
+                                formControlName="isHidden">
+                          <option value="Y">Yes</option>
+                          <option value="N" selected>No</option>
+                        </select></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="isReadOnlyInput"><span
+                          class="inputtext">Read only:</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <select id="isReadOnlyInput" class="form-control form-control-sm mb-1 "
+                                formControlName="isReadOnly">
+                          <option value="Y">Yes</option>
+                          <option value="N" selected>No</option>
+                        </select></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <label class="form-label" for="toolTipInput"><span class="inputtext">Tooltip:</span></label>
+                      </div>
+                      <div class="col-xl-8">
+                        <input id="toolTipInput" class="form-control form-control-sm mb-1" formControlName="toolTip">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xl-4">
                         <label class="form-label" for="maxInput"><span class="inputtext">Max</span></label>
                       </div>
                       <div class="col-xl-8">
@@ -174,81 +259,105 @@
                       </div>
                     </div>
                   </div>
+                </div>
+                <div *ngIf="addSelectOptions" class="row card"
+                     style="display: flex; flex-direction: column; margin-top: 10px">
 
-                  <div class="col-xl-6">
-                    <div class="row">
-                      <div class="col-xl-4">
-                        <label class="form-label" for="isRequiredInput"><span
-                          class="inputtext">Is required:</span></label>
-                      </div>
-                      <div class="col-xl-8">
-                        <select id="isRequiredInput" class="form-control form-control-sm mb-1 "
-                                formControlName="isMandatory">
-                          <option value="Y">Yes</option>
-                          <option value="N" selected>No</option>
-                        </select></div>
-                    </div>
-                    <br>
-                    <div class="row">
-                      <div class="col-xl-4">
-                        <label class="form-label" for="isEnabledInput"><span
-                          class="inputtext">Is enabled:</span></label>
-                      </div>
-                      <div class="col-xl-8">
-                        <select id="isEnabledInput" class="form-control form-control-sm mb-1 "
-                                formControlName="isEnabled">
-                          <option value="Y" selected>Yes</option>
-                          <option value="N" >No</option>
-                        </select></div>
-                    </div>
-                    <br>
-                    <div class="row">
-                      <div class="col-xl-4">
-                        <label class="form-label" for="isHiddenInput"><span
-                          class="inputtext">Is hidden:</span></label>
-                      </div>
-                      <div class="col-xl-8">
-                        <select id="isHiddenInput" class="form-control form-control-sm mb-1 "
-                                formControlName="isHidden">
-                          <option value="Y" >Yes</option>
-                          <option value="N" selected >No</option>
-                        </select></div>
-                    </div>
-                    <br>
-                    <div class="row">
-                      <div class="col-xl-4">
-                        <label class="form-label" for="isReadOnlyInput"><span
-                          class="inputtext">Is Read Only:</span></label>
-                      </div>
-                      <div class="col-xl-8">
-                        <select id="isReadOnlyInput" class="form-control form-control-sm mb-1 "
-                                formControlName="isReadOnly">
-                          <option value="Y" >Yes</option>
-                          <option value="N" selected >No</option>
-                        </select></div>
-                    </div>
-                    <br>
-                    <div class="row">
-                      <div class="col-xl-4">
-                        <label class="form-label" for="placeholderInput"><span
-                          class="inputtext">Placeholder:</span></label>
-                      </div>
-                      <div class="col-xl-8">
-                        <input id="placeholderInput" class="form-control form-control-sm mb-1"
-                               formControlName="placeholder">
-                      </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                      <div class="col-xl-4">
-                        <label class="form-label" for="toolTipInput"><span class="inputtext">Tool tip:</span></label>
-                      </div>
-                      <div class="col-xl-8">
-                        <input id="toolTipInput" class="form-control form-control-sm mb-1" formControlName="toolTip">
-                      </div>
-                    </div>
-                    <br>
+                  <div class="card-header" style="display: flex; justify-content: space-between">
+                    <button type="button" (click)="toggleAddSelectOptions()" *ngIf="fieldForm.value.type === 'select'"
+                            style="background-color: #00529B; color: white; border-radius: 5px; font-weight: normal"
+                            class="btn"><< back
+                    </button>
 
+                    <button (click)="toggleListSelectOptions()" type="button" *ngIf="fieldForm.value.type === 'select'"
+                            style="color: #00529B; border: 2px solid #00529B; border-radius: 5px; font-weight: normal"
+                            class="btn">{{!listSelectOptions ? 'list' : '+Add'}}
+                    </button>
+                  </div>
+                  <div class="card-body" style="margin: auto">
+                    <div><h4 align="center">Options</h4></div>
+                    <div *ngIf="listSelectOptions">
+                      <p-table selectionMode="single" (onRowSelect)="onSelectOptionChosen($event)"
+                               [tableStyle]="{'min-width': '100%'}"
+                               [value]="newSelectOptions" styleClass="p-datatable-sm p-datatable-gridlines"
+                               [(selection)]="chosenSelectOption">
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th>Text</th>
+                            <th>Value</th>
+                            <th>Selected</th>
+                            <th>Hidden</th>
+                            <th>Enabled</th>
+                          </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-option>
+                          <tr [pSelectableRow]="option">
+                            <td>{{option.text}}</td>
+                            <td>{{option.value}}</td>
+                            <td>{{option.isSelected}}</td>
+                            <td>{{option.isHidden}}</td>
+                            <td>{{option.isEnabled}}</td>
+                          </tr>
+                        </ng-template>
+                      </p-table>
+                    </div>
+                    <div *ngIf="!listSelectOptions">
+                      <form [formGroup]="selectOptionForm" (ngSubmit)="addNewSelectOption()">
+
+
+                        <div class="col-xl-6 ">
+                          <div class="col-xl-6">
+                            <label for="optionText">Text</label>
+                          </div>
+                          <div class="col-xl-6">
+                            <input formControlName="text" id="optionText" type="text"/>
+                          </div>
+                        </div>
+                        <br>
+                        <div class="col-xl-6 ">
+                          <div class="col-xl-6">
+                            <label for="optionValue">Value</label>
+                          </div>
+                          <div class="col-xl-6">
+                            <input formControlName="value" id="optionValue" type="text"/>
+                          </div>
+                        </div>
+                        <br>
+                        <div style="display: flex; justify-content: space-around;">
+                          <label for="isSelected">Selected</label>
+
+                          <select formControlName="selected" id="isSelected">
+                            <option value="Y">Yes</option>
+                            <option value="N" selected>No</option>
+                          </select>
+                        </div>
+                        <br>
+                        <div style="display: flex; justify-content: space-around;">
+                          <label for="isHidden">Hidden</label>
+                          <select formControlName="hidden" id="isHidden">
+                            <option value="Y">Yes</option>
+                            <option value="N" selected>No</option>
+                          </select>
+                        </div>
+                        <br>
+                        <div style="display: flex; justify-content: space-around;">
+                          <label for="isEnabled">Enabled</label>
+                          <select formControlName="enabled" id="isEnabled">
+                            <option value="Y" selected>Yes</option>
+                            <option value="N">No</option>
+                          </select>
+
+                        </div>
+                        <br>
+                        <div style="display: flex; justify-content: space-around">
+                          <button type="button" class="btn" style="border: 2px solid #00529B; color: #00529B">Clear
+                          </button>
+                          <button type="submit" class="btn"
+                                  style="background-color: #00529B; color: white">Add
+                          </button>
+                        </div>
+                      </form>
+                    </div>
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -269,7 +378,8 @@
             <h5>Fields</h5>
             <div style="display: flex; justify-content: space-between">
               <ul class="nav">
-                <li *ngIf="selectedScreen" class="nav-item" style="border: 1px solid #00529B; border-radius: 5px; margin: auto 5px">
+                <li *ngIf="selectedScreen" class="nav-item"
+                    style="border: 1px solid #00529B; border-radius: 5px; margin: auto 5px">
                   <a (click)="clearFieldsEntry()" class="nav-link active" aria-current="page" data-toggle="modal"
                      data-target="#exampleModalCenter">+Add
                     field</a>
