@@ -2,10 +2,13 @@ package com.example.screensservice.model.entity;
 
 import com.example.screensservice.enums.ScreenTypeEnum;
 import com.example.screensservice.enums.YesNoEnum;
+import com.example.screensservice.model.dto.SelectOptionDto;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -52,7 +55,7 @@ public class Field {
     @Enumerated(EnumType.STRING)
     private ScreenTypeEnum type;
 
-    @Column( name = "SF_SCREEN_ID")
+    @Column(name = "SF_SCREEN_ID")
     private BigDecimal screenId;
 
     @Column(name = "SF_ENABLED")
@@ -66,4 +69,12 @@ public class Field {
     @Column(name = "SF_READ_ONLY")
     @Enumerated(EnumType.STRING)
     private YesNoEnum isReadOnly;
+
+    @ManyToMany
+    @JoinTable(
+            name = "select_options_per_field",
+            joinColumns = @JoinColumn(name = "SOPF_FIELD_ID"),
+            inverseJoinColumns = @JoinColumn(name = "SOPF_SELECT_OPTION_ID")
+    )
+    private List<SelectOption> selectOptions = new ArrayList<>();
 }

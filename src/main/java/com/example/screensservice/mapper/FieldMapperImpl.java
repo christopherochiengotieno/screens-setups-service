@@ -2,13 +2,22 @@ package com.example.screensservice.mapper;
 
 import com.example.screensservice.model.dto.FieldDto;
 import com.example.screensservice.model.entity.Field;
+import com.example.screensservice.model.entity.SelectOption;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
+@RequiredArgsConstructor
 public class FieldMapperImpl implements FieldMapper {
+
+    private final SelectOptionMapper selectOptionMapper;
+
     @Override
     public FieldDto toDto(Field field) {
-        return FieldDto.builder()
+        FieldDto mappedField = FieldDto.builder()
                 .min(field.getMin())
                 .screenId(field.getScreenId())
                 .defaultValue(field.getDefaultValue())
@@ -24,6 +33,11 @@ public class FieldMapperImpl implements FieldMapper {
                 .isHidden(field.getIsHidden())
                 .isReadOnly(field.getIsReadOnly())
                 .build();
+        List<SelectOption> selectOptions = field.getSelectOptions();
+        if (selectOptions != null) {
+            mappedField.setSelectOptions(selectOptions.stream().map(selectOptionMapper::toDto).collect(Collectors.toList()));
+        }
+        return mappedField;
     }
 
     @Override

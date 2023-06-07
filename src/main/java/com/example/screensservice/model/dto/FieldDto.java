@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @Data
@@ -25,4 +27,5 @@ public class FieldDto {
     private YesNoEnum isEnabled;
     private YesNoEnum isHidden;
     private YesNoEnum isReadOnly;
+    private List<SelectOptionDto> selectOptions = new ArrayList<>();
 }
