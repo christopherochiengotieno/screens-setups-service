@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ScreenSetupsService} from "../services/screen-setups.service";
-import {Field, Screen, SelectOption} from "../interfaces/commons";
+import {Field, Form, SelectOption} from "../interfaces/commons";
 import {Subject} from "rxjs";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
@@ -14,8 +14,8 @@ import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api
 })
 export class ScreensComponent implements OnInit {
 
-  screens: Screen[] = [];
-  selectedScreen !: Screen;
+  screens: Form[] = [];
+  selectedScreen !: Form;
   classesForm!: FormGroup;
   showViewOrAddSection: "ADD" | "VIEW" = "VIEW";
   selectedButton: string = 'selectedButton';
@@ -26,11 +26,6 @@ export class ScreensComponent implements OnInit {
   listSelectOptions: boolean = true;
   chosenSelectOption!: SelectOption;
   newSelectOptions: SelectOption[] = [];
-  selectOptionTextInput = new FormControl({value: '', disabled: false})
-  selectOptionChosenInput: "Y" | "N" = "N";
-  selectOptionValueInput!: string;
-  selectOptionHiddenInput: "Y" | "N" = "N";
-  selectOptionEnabledInput: "Y" | "N" = "N";
   selectOptionForm!: FormGroup;
 
   constructor(private screenSetupsService: ScreenSetupsService,
@@ -63,12 +58,12 @@ export class ScreensComponent implements OnInit {
   }
 
   selectScreen(event: any): void {
-    const selectedScreens: Screen[] = this.screens.filter(screen => screen.id == event.target.value);
+    const selectedScreens: Form[] = this.screens.filter(screen => screen.id == event.target.value);
     if (selectedScreens.length > 0) {
       this.selectedScreen = selectedScreens[0];
       this.classesForm.patchValue({
         id: this.selectedScreen.id + "",
-        screenName: this.selectedScreen.screenName,
+        screenName: this.selectedScreen.name,
         shortDescription: this.selectedScreen.shortDescription,
         description: this.selectedScreen.description,
         module: this.selectedScreen.module == 1 ? "GIS" : this.selectedScreen.module == 2 ? "BANCA" : "S"
@@ -114,7 +109,7 @@ export class ScreensComponent implements OnInit {
       placeholder: this.selectedField?.placeholder,
       toolTip: this.selectedField?.toolTip,
       type: this.selectedField?.type,
-      screenId: this.selectedField?.screenId,
+      formId: this.selectedField?.formId,
       isHidden: this.selectedField?.isHidden,
       isEnabled: this.selectedField?.isEnabled,
       isReadOnly: this.selectedField?.isReadOnly
@@ -147,10 +142,10 @@ export class ScreensComponent implements OnInit {
       placeholder: [''],
       toolTip: [''],
       type: ['text'],
-      screenId: [''],
-      isEnabled: [''],
-      isHidden: [''],
-      isReadOnly: ['']
+      formId: [''],
+      isEnabled: ['Y'],
+      isHidden: ['N'],
+      isReadOnly: ['N']
     })
   }
 
@@ -166,11 +161,12 @@ export class ScreensComponent implements OnInit {
       placeholder: '',
       toolTip: '',
       type: 'text',
-      screenId: '',
-      isEnabled: '',
-      isHidden: '',
-      isReadOnly: ''
+      formId: '',
+      isEnabled: 'Y',
+      isHidden: 'N',
+      isReadOnly: 'N'
     })
+    this.newSelectOptions = []
   }
 
   saveOrUpdateField() {
@@ -194,7 +190,7 @@ export class ScreensComponent implements OnInit {
         this.screenSetupsService.addFieldToScreen(this.selectedScreen.id, fields).subscribe(res => {
           this.initializeScreenSetupsData();
           this.clearFieldsEntry()
-          let newScreenDetails: Screen[] = this.screens.filter(screen => screen.id == this.selectedScreen.id);
+          let newScreenDetails: Form[] = this.screens.filter(screen => screen.id == this.selectedScreen.id);
           if (newScreenDetails.length > 0) {
             this.selectedScreen = newScreenDetails[0]
           }
@@ -206,7 +202,7 @@ export class ScreensComponent implements OnInit {
 
   deleteFieldById(field?: Field) {
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to delete ' + this.selectedField?.label + ' from ' + this.selectedScreen.screenName + '?',
+      message: 'Are you sure that you want to delete ' + this.selectedField?.label + ' from ' + this.selectedScreen.name + '?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {

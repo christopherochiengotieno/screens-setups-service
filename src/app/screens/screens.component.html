@@ -35,7 +35,7 @@
           <select id="screenSelection" (change)="selectScreen($event)"
                   style="min-height: 30px; width: 220px; text-align: left; padding-left: 5px">
             <option selected disabled hidden="hidden" value="">Choose a Screen</option>
-            <option *ngFor="let screen of screens" value="{{screen.id}}">{{screen.screenName}}</option>
+            <option *ngFor="let screen of screens" value="{{screen.id}}">{{screen.name}}</option>
           </select>
 
           <form [formGroup]="classesForm" (ngSubmit)="saveOrUpdateScreen()">
@@ -89,7 +89,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 *ngIf="selectedScreen" class="modal-title" id="exampleModalLongTitle">Add field details
-                to {{selectedScreen.screenName}}</h5>
+                to {{selectedScreen.name}}</h5>
               <h5 *ngIf="!selectedScreen" class="modal-title">Add field details</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -166,7 +166,7 @@
                     </div>
                     <br>
                     <div class="row" style="display: flex; justify-content: space-around; padding: auto 10px">
-                      <button (click)="toggleShowFieldAdvancedSetup()" style="color: #00529B; font-weight: normal;"
+                      <button type="button" (click)="toggleShowFieldAdvancedSetup()" style="color: #00529B; font-weight: normal;"
                               class="btn">advanced
                       </button>
                       <button (click)="toggleAddSelectOptions()" *ngIf="fieldForm.value.type === 'select'"
@@ -416,7 +416,7 @@
                   <th>Max</th>
                   <th>Min</th>
                   <th style="max-width:100px">Default Value</th>
-                  <th>Placeholder</th>
+                  <th style="min-width: 100px; max-width: 200px; max-height: 50px">Placeholder</th>
                   <th>Tooltip</th>
 
                 </tr>
@@ -434,7 +434,7 @@
                   <td>{{field.max}}</td>
                   <td>{{field.min}}</td>
                   <td>{{field.defaultValue}}</td>
-                  <td>{{field.placeholder}}</td>
+                  <td style="min-width: 100px; max-width: 200px; max-height: 10px">{{field.placeholder}}</td>
                   <td style="min-width: 200px">{{field.toolTip}}</td>
 
                 </tr>

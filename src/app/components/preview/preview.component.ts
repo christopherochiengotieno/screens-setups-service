@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {ScreenSetupsService} from "../../services/screen-setups.service";
-import {Field, Screen} from "../../interfaces/commons";
+import {Field, Form} from "../../interfaces/commons";
 import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
@@ -12,10 +12,10 @@ import {FormControl, FormGroup} from "@angular/forms";
 export class PreviewComponent implements OnInit{
 
   title: string = "preview works"
-  screen!: Screen;
+  screen!: Form;
   mandatoryFrontendScreens: Field[] = [];
   optionalFrontendScreens: Field[] = [];
-  allFrontendScreens: Screen[] = [];
+  allFrontendScreens: Form[] = [];
   showOptionalFields: boolean = false;
 
   classesForm: FormGroup = new FormGroup<any>({});

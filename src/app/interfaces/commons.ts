@@ -18,16 +18,16 @@ export interface Field {
   placeholder: string,
   toolTip: string,
   type: "text" | "number" | "date" | "checkout" | "select",
-  screenId: number,
+  formId: number,
   isEnabled: "Y" | "N",
   isHidden: "Y" | "N",
   isReadOnly: "Y" | "N",
   selectOptions: SelectOption[]
 }
 
-export interface Screen {
+export interface Form {
   id?: number,
-  screenName: string,
+  name: string,
   shortDescription: string,
   description: string,
   module: number,
